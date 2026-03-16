@@ -1,125 +1,180 @@
-# CEO WhatsApp — Gerenciador de Grupos
+<div align="center">
 
-Ferramenta desktop para **ativar ou desativar o envio de mensagens** em grupos do WhatsApp Web de forma automatizada, com controle de limites diários, auditoria de ações e proteção antidetecção.
+# 📱  WhatsApp — Gerenciador de Grupos
 
----
+**Automatize o controle de permissões em grupos do WhatsApp Web com segurança, limites e rastreabilidade.**
 
-## Funcionalidades
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Selenium](https://img.shields.io/badge/Selenium-4.15%2B-green?style=for-the-badge&logo=selenium&logoColor=white)](https://selenium.dev/)
+[![CustomTkinter](https://img.shields.io/badge/UI-CustomTkinter-orange?style=for-the-badge)](https://github.com/TomSchimansky/CustomTkinter)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge)](LICENSE)
 
-- Ativa ou desativa o envio de mensagens em lotes de grupos via WhatsApp Web
-- Importa a lista de grupos a partir de planilha `.xlsx` ou `.csv`
-- Controle de limites por turno (manhã/noite) e por dia
-- Log de auditoria em arquivo `.jsonl` para rastreabilidade
-- Sessão persistente do Chrome (evita novo QR Code a cada execução)
-- Pausas humanizadas entre ações para reduzir risco de bloqueio
-- Interface gráfica moderna com tema escuro
+</div>
 
 ---
 
-## Estrutura do projeto
+## 🧩 O problema que resolvemos
+
+Quem gerencia muitos grupos no WhatsApp sabe: **ativar ou desativar o envio de mensagens em cada grupo é um processo 100% manual** — entrar em cada grupo, ir em configurações, permissões, alterar o switch, voltar... e repetir isso para cada um dos grupos.
+
+Com 30, 40 ou 60 grupos, isso tomava **horas de trabalho** repetitivo e sujeito a erros.
+
+> **Solução:** uma interface simples que lê uma planilha com os nomes dos grupos e faz todo esse processo automaticamente, com pausas humanizadas, controle de limites diários e log de auditoria.
+
+---
+
+## ✨ Funcionalidades
+
+| Funcionalidade | Descrição |
+|---|---|
+| ⚡ **Automação em lote** | Processa vários grupos em sequência a partir de uma planilha |
+| 🔀 **Ativar / Desativar** | Alterna a permissão de envio de mensagens por membros |
+| 🛡️ **Controle de limites** | Máximo de 30 grupos por turno e 60 por dia para evitar bloqueios |
+| 📋 **Auditoria** | Cada sessão é registrada em arquivo `.jsonl` com data, turno e ação |
+| 🌙 **Turnos (manhã/noite)** | Detecção automática ou seleção manual do turno de operação |
+| 🔒 **Sessão persistente** | Login do WhatsApp Web salvo entre execuções (sem novo QR Code) |
+| 🧠 **Comportamento humano** | Digitação caractere a caractere e pausas aleatórias entre ações |
+| ✅ **Modo seguro** | Confirmação de lote antes de iniciar o processamento |
+
+---
+
+## 🗂️ Estrutura do projeto
 
 ```
-├── main.py          # Ponto de entrada
-├── app.py           # Interface gráfica (customtkinter)
-├── bot.py           # Automação via Selenium
-├── usage.py         # Controle de limites e log de auditoria
-├── config.py        # Constantes e configurações
-├── requirements.txt # Dependências Python
-├── build.bat        # Gera executável .exe com PyInstaller
-└── .gitignore
+📦 ceo-whatsapp-grupos
+ ├── 📄 main.py           # Ponto de entrada da aplicação
+ ├── 🖥️  app.py            # Interface gráfica (CustomTkinter)
+ ├── 🤖 bot.py            # Automação via Selenium (WhatsApp Web)
+ ├── 📊 usage.py          # Controle de limites e log de auditoria
+ ├── ⚙️  config.py         # Constantes e configurações globais
+ ├── 📋 requirements.txt  # Dependências Python
+ ├── 🔨 build.bat         # Gera executável .exe com PyInstaller
+ └── 🚫 .gitignore        # Exclui dados sensíveis do versionamento
 ```
 
 ---
 
-## Pré-requisitos
+## 🚀 Instalação e execução
 
-- Python 3.10 ou superior
-- Google Chrome instalado
+### Pré-requisitos
 
----
+- [Python 3.10+](https://www.python.org/downloads/)
+- [Google Chrome](https://www.google.com/chrome/) instalado
 
-## Instalação
+### Passo a passo
 
 ```bash
-# Clone o repositório
-git clone https://github.com/seu-usuario/seu-repo.git
-cd seu-repo
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/ceo-whatsapp-grupos.git
+cd ceo-whatsapp-grupos
 
-# Instale as dependências
+# 2. Instale as dependências
 pip install -r requirements.txt
-```
 
----
-
-## Como usar
-
-### 1. Execute a aplicação
-
-```bash
+# 3. Execute
 python main.py
 ```
 
-### 2. Prepare a planilha
+---
 
-Clique em **Baixar Modelo Excel** para obter o modelo com a coluna `Nome do Grupo`.
-Preencha os nomes exatamente como aparecem no WhatsApp (maiúsculas, acentos e espaços incluídos).
+## 📖 Como usar
 
-### 3. Carregue a lista
+<details>
+<summary><strong>1️⃣ Baixar o modelo de planilha</strong></summary>
 
-Clique em **Carregar Lista (Excel/CSV)** e selecione o arquivo preenchido.
+Clique em **"Baixar Modelo Excel"** dentro da aplicação e salve o arquivo.
+O modelo contém a coluna obrigatória: **`Nome do Grupo`**.
 
-### 4. Escolha a ação
+</details>
+
+<details>
+<summary><strong>2️⃣ Preencher a lista de grupos</strong></summary>
+
+Abra o arquivo Excel e preencha os nomes dos grupos **exatamente como aparecem no WhatsApp** — incluindo maiúsculas, acentos e espaços.
+
+</details>
+
+<details>
+<summary><strong>3️⃣ Carregar o arquivo</strong></summary>
+
+Clique em **"Carregar Lista (Excel/CSV)"** e selecione o arquivo preenchido.
+A aplicação exibirá quantos grupos foram detectados.
+
+</details>
+
+<details>
+<summary><strong>4️⃣ Escolher a ação</strong></summary>
 
 | Opção | Efeito |
-|-------|--------|
+|---|---|
 | **Ativar** | Permite que membros enviem mensagens no grupo |
 | **Desativar** | Bloqueia o envio de mensagens por membros |
 
-### 5. Configure o turno
+</details>
 
-- **Auto** — detecta manhã (antes das 12h) ou noite automaticamente
-- **Manha / Noite** — força o turno manualmente
+<details>
+<summary><strong>5️⃣ Configurar o turno e limites</strong></summary>
 
-Limites aplicados:
+Escolha entre **Auto**, **Manhã** ou **Noite**.
 
 | Limite | Valor padrão |
-|--------|-------------|
+|---|---|
 | Por sessão | 30 grupos |
-| Por turno | 30 grupos |
+| Por turno (manhã ou noite) | 30 grupos |
 | Por dia | 60 grupos |
 
-### 6. Inicie o processamento
+Os contadores são zerados automaticamente a cada novo dia.
 
-Clique em **Iniciar Processamento**. O Chrome abrirá automaticamente.
-Na primeira execução, escaneie o QR Code do WhatsApp Web.
-Com a opção **Reutilizar sessão** ativada, o login fica salvo para as próximas execuções.
+</details>
+
+<details>
+<summary><strong>6️⃣ Iniciar o processamento</strong></summary>
+
+Clique em **"Iniciar Processamento"**. O Chrome abrirá automaticamente.
+
+- **Primeiro uso:** escaneie o QR Code do WhatsApp Web.
+- **Usos seguintes:** com a opção "Reutilizar sessão" ativada, o login já estará salvo.
+
+O bot processará cada grupo com pausas humanizadas para reduzir o risco de bloqueio.
+
+</details>
 
 ---
 
-## Gerar executável (.exe)
+## 📁 Arquivos gerados em tempo de execução
+
+> Estes arquivos estão no `.gitignore` e nunca são enviados ao repositório.
+
+| Arquivo | Descrição |
+|---|---|
+| `whatsapp_usage_log.json` | Contador de grupos processados por dia e turno |
+| `whatsapp_audit_log.jsonl` | Histórico completo de sessões (data, turno, ação, quantidade) |
+| `chrome-profile/` | Perfil do Chrome com sessão salva do WhatsApp Web |
+
+---
+
+## 🔨 Gerar executável (.exe)
+
+Para distribuir sem precisar instalar Python:
 
 ```bash
 build.bat
 ```
 
-O arquivo `CEO_WhatsApp.exe` será gerado na pasta `dist/`.
+O executável `CEO_WhatsApp.exe` será gerado em `dist/`.
 
 ---
 
-## Arquivos gerados em tempo de execução
+## ⚠️ Aviso legal
 
-| Arquivo | Descrição |
-|---------|-----------|
-| `whatsapp_usage_log.json` | Contador de grupos processados por dia/turno |
-| `whatsapp_audit_log.jsonl` | Histórico completo de sessões (data, turno, ação, quantidade) |
-| `chrome-profile/` | Perfil do Chrome com sessão salva do WhatsApp Web |
-
-> Esses arquivos estão no `.gitignore` e não são versionados.
-
----
-
-## Aviso
-
-Este projeto automatiza interações no WhatsApp Web.
+Este projeto automatiza interações com o WhatsApp Web.
 O uso de automação pode estar em conflito com os [Termos de Serviço do WhatsApp](https://www.whatsapp.com/legal/terms-of-service).
-Use com responsabilidade e apenas em grupos que você administra.
+**Use apenas em grupos que você administra e sob sua responsabilidade.**
+
+---
+
+<div align="center">
+
+Feito com 🧡 para gestão de grupos no WhatsApp Web
+
+</div>
