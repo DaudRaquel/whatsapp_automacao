@@ -1,0 +1,31 @@
+# Dependencias e cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Sessao do Chrome (login salvo)
+chrome-profile/
+
+# Logs gerados pela aplicacao
+whatsapp_usage_log.json
+whatsapp_audit_log.jsonl
+crash.log
+
+# Planilhas com dados sensiveis
+*.xlsx
+*.xls
+*.csv
+
+# Build PyInstaller
+build/
+dist/
+*.spec
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
